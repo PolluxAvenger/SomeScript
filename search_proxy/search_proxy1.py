@@ -61,4 +61,4 @@ if __name__ == "__main__":
             result = ip_port + ' ' + content + '\n'
             f.write(str(result))
 
-    print('%s个代理已获得！' % len(rawProxyList))
+    print('%s个代理已获得！写入文件成功！' % len(rawProxyList))
