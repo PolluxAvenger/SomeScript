@@ -10,6 +10,8 @@ import requests
     cip.cc
     ifconfig.me
     myip.ipip.net
+	ip-api.com
+	ip.zishuo.net
 '''
 
 
