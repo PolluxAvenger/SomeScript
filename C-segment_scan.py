@@ -14,7 +14,7 @@ def worker(ip_address):
 
     try:
         nmap_Scan = nmap.PortScanner()
-        nmap_Scan.scan(ip_address, '22-443')
+        nmap_Scan.scan(ip_address, '22-1024')
     except Exception as e:
         print(str(e))
 
