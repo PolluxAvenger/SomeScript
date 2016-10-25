@@ -18,5 +18,4 @@ def password(length = 10):
 
 
 if __name__ == '__main__':
-
-    password()
+	password()
