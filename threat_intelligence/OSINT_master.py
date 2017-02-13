@@ -1,5 +1,6 @@
 # coding=utf-8
 
+import re
 import os
 import csv
 import requests
@@ -24,15 +25,19 @@ def extract_data(url):
             if count < 14:
                 count += 1
                 continue
+
             split_result = str(item).split(',')
+            regular = re.compile(r'Domain used by \b(.+?) \b')
+            family = re.match(regular, split_result[1])
+
             ip_list.append({'Domain': split_result[0],
                             'Date': split_result[2],
-                            'Description': split_result[1]})
+                            'Family': family.group(1).split(' ')[0]})
 
     os.remove(file_type + '_row.txt')
 
     with open('dga_all_track.csv', 'w', newline='', encoding='utf-8') as t:
-        headers = ['Domain', 'Date', 'Description']
+        headers = ['Domain', 'Date', 'Family']
         writer = csv.DictWriter(t, headers)
         writer.writeheader()
 
