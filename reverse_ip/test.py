@@ -14,7 +14,6 @@ requests.packages.urllib3.disable_warnings()
 headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20'}
 
-
 def links_ip(host):
     ip2hosts = []
     ip2hosts.append("http://" + host)
@@ -31,7 +30,6 @@ def links_ip(host):
             ip2hosts.append(div.a.string)
 
     except Exception as e:
-        print(str(e))
         return ip2hosts
 
     return ip2hosts
@@ -54,7 +52,6 @@ def ip2host_get(host):
                         ip2hosts.append(item)
 
     except Exception as e:
-        print(str(e))
         return ip2hosts
 
     return ip2hosts
@@ -67,8 +64,6 @@ def filter(host):
         title = re.findall(r'<title>(.*?)</title>', response.content)[0]
     except Exception as e:
         pass
-    else:
-        print(host, server)
 
 
 def aizhan(host):
