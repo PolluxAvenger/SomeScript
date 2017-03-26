@@ -22,9 +22,6 @@ def person_data(person_info, result_list):
         count += 1
         if item.contents[1].text.split(':')[0] == '':
             continue
-        elif count == 4:
-            # .encode('latin-1').decode('unicode_escape') 可以解决 str 转换成中文的问题，若是 bytes 则后半部分即可，此处无用
-            result_list.append({'单位地址': item.contents[3].text.replace(u'\xa0', '')})
         elif count <= 11:
             result_list.append({item.contents[1].text.split(':')[0] : item.contents[3].text.replace(u'\xa0', '')})
         elif count >= 13 and count < 23:
