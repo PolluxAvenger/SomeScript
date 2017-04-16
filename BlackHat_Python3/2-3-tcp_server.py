@@ -15,7 +15,7 @@ print("[*] Litening on %s:%d" % (bind_ip, bind_port))
 def handle_client(client_socket):
     request = client_socket.recv(1024)
     print("[*] Received: %s" % request)
-    client_socket.send(b"ACK!\r\n")
+    client_socket.send(b"发送 ACK \r\n")
     client_socket.close()
 
 
