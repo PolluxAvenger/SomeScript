@@ -22,5 +22,3 @@ while 1:
     count += 1
     if count == 12:
         break
-
-print(mac_address)
