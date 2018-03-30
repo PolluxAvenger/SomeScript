@@ -4,12 +4,25 @@ import re
 import csv
 import bs4
 import sys
+import ssl
 import time
 import pickle
 import random
+import requests
 import urllib.request
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.poolmanager import PoolManager
+
 
 sys.setrecursionlimit(15000)
+
+
+class MyAdapter(HTTPAdapter):
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = PoolManager(num_pools=connections,
+                                       maxsize=maxsize,
+                                       block=block,
+                                       ssl_version=ssl.PROTOCOL_TLSv1)
 
 
 def phish_data(result_list, page_max = 50):
@@ -19,10 +32,11 @@ def phish_data(result_list, page_max = 50):
     page = 0
 
     while page < page_max:
-        url = 'https://www.phishtank.com/phish_search.php?page=' + str(page) + '&active=y&verified=y'
-        request = urllib.request.Request(url, headers=header)
-        response = urllib.request.urlopen(request)
-        content = response.read()
+	    s = requests.Session()
+        s.mount('https://', MyAdapter())
+        url = 'https://www.phishtank.com/phish_search.php?page=' + str(page) + '&active=y&verified=u'
+        response = s.get(url)
+        content = response.text
         result = bs4.BeautifulSoup(content, "html.parser")
         link = result.find_all('tr')
 
@@ -64,5 +78,5 @@ def extract():
 
 if __name__ == "__main__":
     marlware_list = []
-    marlware_list = phish_data(marlware_list, 100)
+    marlware_list = phish_data(marlware_list, 10)
     extract()
